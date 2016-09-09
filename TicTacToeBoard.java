@@ -58,32 +58,28 @@ public class TicTacToeBoard
 		return currentState;
 	}
 
-
 	/**
-	* A method that is used to get input from player from the console and 
-	* check if the entered input is a valid integer and the slot is not
+	* A method checks if the entered input is a valid integer and the slot is not
 	* already occupied. 
-	* @param the symbol of the current user 'X' or 'O'
-	* @param the name of the player. Player1/ Player2.  
+	* @param Player class object - the Player object that has made the move.
 	*/
-	public void makeSelection(char playerSymbol, String playerName)
-	{
-		boolean validSelection = false;
-		System.out.println(playerName+"'s Turn.");
-		System.out.println("Choose a free spot on the board from 0-9 to place a "+playerSymbol+".");
-		Scanner in = new Scanner(System.in);
-		playerSelect = in.nextInt();
-		validSelection = checkValidityOfMove(playerSelect);
-		while(!validSelection)
-		{	
-			System.out.println(playerSelect+" Was an invalid selection by " +playerName+".\nPlease Choose a FREE spot between 0 to 9 only.");
-			playerSelect = in.nextInt();
-			validSelection = checkValidityOfMove(playerSelect);
-		}
 
-		adjustBoardStatus(playerSelect, playerSymbol);
+	public void validateSelection(Player inPlayer)
+	{	 
+		System.out.println(inPlayer.getName()+"'s Turn.");
+	 	System.out.println("Choose a free spot on the board from 0-8 to place a "+inPlayer.getSymbol()+".");
+	 	playerSelect = inPlayer.makeSelection();
+	 	boolean validSelection = checkValidityOfMove(playerSelect);
+	 	while(!validSelection)
+	 	{
+	 		System.out.println(playerSelect+" Was an invalid selection by " +inPlayer.getName()+".");
+	 		System.out.println("Please Choose a FREE spot between 0 to 8 only.");
+	 		playerSelect = inPlayer.makeSelection();
+	 		validSelection = checkValidityOfMove(playerSelect);
+	 	}
+	 	adjustBoardStatus(playerSelect, inPlayer.getSymbol());
 	}
-
+	
 	/**
 	* Return true if the move in the board was a valid move.
 	* False otherwise. 

@@ -14,14 +14,14 @@ public class TicTacToe
 		
 		while(newBoard.getCurrentState() == 0)
 		{
-			newBoard.makeSelection(newBoard.getPlayer1().getSymbol(), newBoard.getPlayer1().getName());
+			newBoard.validateSelection(newBoard.getPlayer1());
 			newBoard.drawBoard();
 			newBoard.terminateGame();
 
 			if(newBoard.isFull() || newBoard.getCurrentState() != 0) //break out of the while loop only if the game is over. 
 				break;
 
-			newBoard.makeSelection(newBoard.getPlayer2().getSymbol(), newBoard.getPlayer2().getName());
+			newBoard.validateSelection(newBoard.getPlayer2());
 			newBoard.drawBoard();
 			newBoard.terminateGame();
 
