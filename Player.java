@@ -1,3 +1,4 @@
+import java.util.Scanner;
 /**
 * A class that manages the Player Info.
 * @author Abrar Amin
@@ -7,7 +8,7 @@ public class Player
 	private String name; // Name chosen by the player.
 	private int points;  // The final points of the player. Each win increments point by 1.
 	private char symbol;  // 'X' or 'O' - what the player chooses.
-	//private PlayerInput input;
+
 
 	/**
 	* Default Constructor.
@@ -17,17 +18,17 @@ public class Player
 		name = "Player1";
 		points = 0;
 		symbol = 'X';
-		//input = new PlayerInput();
 	}
-
 
 	public Player(String inName, char inSymbol)
 	{
 		setPlayer(inName, inSymbol);
 		points = 0;
-		//input = new PlayerInput();
 	}
-
+	
+	/**
+	* Copy Constructor.
+	*/
 	public Player(Player inPlayer)
 	{
 		name = inPlayer.getName();
@@ -72,4 +73,15 @@ public class Player
 		return outString;
 	}
 
+	/**
+	* A method that is used to get input from player from the console and 
+	* @return the int that has been provided by the user as a console input. 
+	*/
+	public int makeSelection()
+	{
+		int playerSelect;
+		Scanner in = new Scanner(System.in);
+		playerSelect = in.nextInt();
+		return playerSelect;
+	}
 }
