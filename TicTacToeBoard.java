@@ -15,15 +15,23 @@ public class TicTacToeBoard
 	private static final char DEFAULT = '-'; // Default value to be stored in the array of chars.
 	
 	private char[][] boardStatus; // 2D array 
-	private int playerSelect; // The integer input of the player.
-	
-	
 	/**
 	* Default constructor, sets up the board for a new game.
 	**/
 	public TicTacToeBoard()
 	{
 		boardStatus = new char[ROW][COL];
+		for(int i = 0; i<ROW; i++)
+		{ 
+			Arrays.fill(boardStatus[i], DEFAULT );  // Initialize every single element of the rows of array as '-'.
+		}
+	}
+	
+	/**
+	 * Resets the game by setting every occupied slots in the 2D array to defaults. 
+	 */
+	public void resetBoard()
+	{
 		for(int i = 0; i<ROW; i++)
 		{ 
 			Arrays.fill(boardStatus[i], DEFAULT );  // Initialize every single element of the rows of array as '-'.
@@ -54,9 +62,6 @@ public class TicTacToeBoard
 	*/
 	public void drawBoard()
 	{
-		//refresh(); // Clears the console
-		int count = 0;
-
 		System.out.print("\n ------tic-tac-toe------");  // Prints title of the game.
 		System.out.println(HEADER);
 
@@ -79,7 +84,6 @@ public class TicTacToeBoard
 				{
 					System.out.print("  "+'O'+"  | ");
 				}
-				count++;
 			}
 			
 			System.out.println(HEADER);
@@ -125,7 +129,9 @@ public class TicTacToeBoard
 
 	/**
 	* Converts the console input from the user- an int between 0 to 9
-	* to a valid position in out 2D array - boardStatus. 
+	* to a valid position in out 2D array - boardStatus. I.e. if user enters 5, gets interpret as 1,2 in 2D array.
+	* @param x,  the integer that was entered. 
+	* @param y, the character representing either 'X' or 'O' - symbol the player is using. 
 	*/
 	public void adjustBoardStatus(int x, char y)
 	{

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
 * A class that manages the Player Info.
 * @author Abrar Amin
@@ -8,7 +10,7 @@ public class Player
 	private int points;  // The final points of the player. Each win increments point by 1.
 	private char symbol;  // 'X' or 'O' - what the player chooses.
 	private boolean isComputer;
-
+	private ArrayList<Integer> ComputerMovement;
 
 	/**
 	* Default Constructor.
@@ -21,10 +23,12 @@ public class Player
 		isComputer = false;
 	}
 
-	public Player(String inName, char inSymbol)
+	public Player(String inName, char inSymbol, boolean inIsComputer)
 	{
-		setPlayer(inName, inSymbol);
+		setPlayer(inName, inSymbol, inIsComputer);
 		points = 0;
+		isComputer = inIsComputer;
+		ComputerMovement = new ArrayList<Integer>();
 	}
 	
 	/**
@@ -38,7 +42,8 @@ public class Player
 	}
 
 
-	public void setPlayer(String inName, char inSymbol)
+	
+	public void setPlayer(String inName, char inSymbol, boolean isAI)
 	{
 		name = inName;
 
@@ -46,6 +51,37 @@ public class Player
 			symbol = inSymbol;
 		else
 			System.out.println("Invalid Symbol Selection. Must choose a 'X' or a 'O'.");
+		isComputer = isAI;
+		
+		if(isAI)
+			populateCompMovementArray();
+	}
+	
+	public void setPoint(int inPoint)
+	{
+		points = inPoint;
+	}
+	
+
+	/**
+	 * Populate the randomised computer arraylist at a newgame or when game is reset.
+	 */
+	public void populateCompMovementArray()
+	{
+		for(int i = 0; i<9; i++)
+		{
+			ComputerMovement.add(i);
+		}
+	}
+	
+	/**
+	 * A mutator that removes the specified number from the movement array because player made their move on that position, can't be repeated.
+	 * @param i the integer to be removed. 
+	 */
+	public void setCompArray(int i)
+	{
+		int removeIndex = ComputerMovement.indexOf(i);
+		ComputerMovement.remove(removeIndex);
 	}
 
 
@@ -62,6 +98,16 @@ public class Player
 	public char getSymbol()
 	{
 		return this.symbol;
+	}
+	
+	public boolean getIsComputer()
+	{
+		return this.isComputer;
+	}
+	
+	public ArrayList<Integer> getCompArray()
+	{
+		return this.ComputerMovement;
 	}
 
 	/**

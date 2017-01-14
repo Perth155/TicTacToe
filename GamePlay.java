@@ -7,23 +7,22 @@ public class GamePlay
 	//Constants 
 	private static final char DEFAULT = '-'; // Default value to be stored in the array of chars.
 	private static final int RESUMEGAME = 0; 
-	private static final int TIE = 1; 
 	private static final int XWINS = 2; 
 	private static final int OWINS = 3; 
 	
 	// Class fields
-	public Player p1;
-	public Player p2;
-	public TicTacToeBoard board;
-	public int currentState; // Describes the state of the current game, compare with constants.
+	private Player p1;
+	private Player p2;
+	private TicTacToeBoard board;
+	private int currentState; // Describes the state of the current game, compare with constants.
 	
 	
 	public GamePlay()
 	{
 		p1 = new Player();
-		p2 = new Player("Player2", 'X');
+		p2 = new Player("Player2", 'X', false);
 		board = new TicTacToeBoard();
-		currentState = 0;
+		currentState = RESUMEGAME;
 	}
 	
 	// Accessors 
@@ -32,19 +31,26 @@ public class GamePlay
 		return currentState;
 	}
 	
-	public Player getPlayer1()
+	public Player getPlayer(int i)
 	{
-		return p1;
+		if(i == 1)
+			return p1;
+		else
+			return p2;
 	}
 	
-	public Player getPlayer2()
-	{
-		return p2;
-	}
 	
 	public TicTacToeBoard getBoard()
 	{
 		return board;
+	}
+	
+	public void resetGame()
+	{
+		board.resetBoard(); 
+		currentState = RESUMEGAME;
+		if(p2.getIsComputer())
+			p2.populateCompMovementArray(); //Reset the computer movement array. 
 	}
 	
 	/**
@@ -54,10 +60,10 @@ public class GamePlay
 	 * @param inName2 the name of player 2 as a String
 	 * @param inSymbol2 the symbol of player 2, set by default after player 1's choice.
 	 */
-	public void setUpGame(String inName1, char inSymbol1, String inName2, char inSymbol2)
+	public void setUpGame(String inName1, char inSymbol1, String inName2, char inSymbol2, boolean isAI)
 	{
-		p1.setPlayer(inName1, inSymbol1);
-		p2.setPlayer(inName2, inSymbol2);	
+		p1.setPlayer(inName1, inSymbol1, false);
+		p2.setPlayer(inName2, inSymbol2, isAI);	
 	}
 	
 	
@@ -131,9 +137,17 @@ public class GamePlay
 	public void endGameResult()
 	{
 		if(currentState == XWINS)
-			System.out.println("**GAME OVER!\n**Player1 wins! Winner: "+p1.getSymbol());
+		{
+			p1.setPoint(p1.getPoints()+1); 
+			System.out.println("GAME OVER!\nPlayer1 wins!  : "+p1.getName()+" "+p1.getSymbol()+" Points: "+p1.getPoints());
+			System.out.println("GAME OVER!\nPlayer2 loses! : "+p2.getName()+" "+p2.getSymbol()+" Points: "+p2.getPoints());
+		}
 		else if(currentState == OWINS)
-			System.out.println("**GAME OVER!**\n**Player2 wins! Winner: "+p2.getSymbol());
+		{
+			p2.setPoint(p2.getPoints()+1); 
+			System.out.println("GAME OVER!\nPlayer2 wins!  : "+p2.getName() + " " +p2.getSymbol()+" Points: "+p2.getPoints());	
+			System.out.println("GAME OVER!\nPlayer1 loses! : "+p1.getName()+" "+p1.getSymbol()+" Points: "+p1.getPoints());
+		}
 		else
 			System.out.println("**GAME OVER!**\n**Match Tied**");
 	}
