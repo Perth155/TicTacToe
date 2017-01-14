@@ -22,10 +22,8 @@ public class TicTacToe
 
 			if(game.getBoard().isFull() || game.getCurrentState() != 0) // Check if game is over. 
 				playOn = checkReset(game, s1); // Call reset option
-			if(playOn == false) //Break out of the loop if playOn is no longer true. 
+			if(!playOn) //Break out of the while loop if playOn is no longer true. 
 				break;
-			
-			
 			if(game.getPlayer(2).getIsComputer()) //If the game is player vs computer.
 				compMovement(game, s1, playerOneSelection);
 			else
@@ -39,19 +37,17 @@ public class TicTacToe
 	
 	private static boolean checkReset(GamePlay game, Scanner s1) 
 	{
-		if(game.getCurrentState() != 0) // If Game has ended due to win or draw.
-		{
-			game.endGameResult();
-			System.out.println("Play Again? [Y/n]");
-			String resetSelection = s1.nextLine();
+		game.endGameResult();
+		System.out.println("Play Again? [Y/n]");
+		String resetSelection = s1.nextLine();
 			
-			if(!(resetSelection.equals("N")|| resetSelection.equals("n") || resetSelection.equals("No")))
-			{
-				game.resetGame();
-				game.getBoard().drawBoard();
-				return true;
-			}
+		if(!(resetSelection.equals("N")|| resetSelection.equals("n") || resetSelection.equals("No")))
+		{
+			game.resetGame();
+			game.getBoard().drawBoard();
+			return true;
 		}
+		
 		return false;
 	}
 
@@ -66,7 +62,6 @@ public class TicTacToe
 	private static int movement(GamePlay game, int i, Scanner inScan) 
 	{
 		int select = getSelection(game, inScan, game.getPlayer(i));
-		System.out.println(game.getBoard().checkValidityOfMove(select));
 		
 		while(!(game.getBoard().checkValidityOfMove(select)))
 		{

@@ -63,15 +63,15 @@ public class Player
 	}
 	
 
+	/**
+	 * Populate the randomised computer arraylist at a newgame or when game is reset.
+	 */
 	public void populateCompMovementArray()
 	{
 		for(int i = 0; i<9; i++)
 		{
 			ComputerMovement.add(i);
 		}
-		
-		System.out.println("Size of ArrayList= "+ComputerMovement.size());
-			
 	}
 	
 	/**
@@ -82,8 +82,6 @@ public class Player
 	{
 		int removeIndex = ComputerMovement.indexOf(i);
 		ComputerMovement.remove(removeIndex);
-		System.out.println(i+" was removed from movement index. Current size of arraylist = "+ComputerMovement.size());
-		
 	}
 
 
