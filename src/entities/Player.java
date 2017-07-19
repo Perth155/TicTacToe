@@ -7,7 +7,8 @@ public class Player
 {
 		private String name; // Name chosen by the player.
 		private int points;  // The final points of the player. Each win increments point by 1.
-		private char symbol;  // 'X' or 'O' - what the player chooses.
+		protected char symbol;  // 'X' or 'O' - what the player chooses.
+		protected char oppSymbol;
 
 		//Constructors
 		public Player()
@@ -21,6 +22,10 @@ public class Player
 		{
 				setPlayer(inName, inSymbol);
 				points = 0;
+				if(this.symbol == 'X')
+					oppSymbol = 'O';
+				else
+					oppSymbol = 'X';
 		}
 
 		public Player(Player inPlayer)
