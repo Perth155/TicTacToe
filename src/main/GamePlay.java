@@ -1,7 +1,7 @@
 package main;
 
 import entities.Player;
-import entities.Enemy;
+import entities.AIPlayer;
 import entities.TicTacToeBoard;
 
 /**
@@ -18,7 +18,7 @@ public class GamePlay
 
 	// Class fields
 	private Player p1;
-	private Enemy p2;
+	private AIPlayer p2;
 	private TicTacToeBoard board;
 	private int currentState; // Describes the state of the current game, compare with constants.
 
@@ -26,7 +26,7 @@ public class GamePlay
 	public GamePlay()
 	{
 			p1 = new Player();
-			p2 = new Enemy(1,"Player2", 'X');
+			p2 = new AIPlayer();
 			board = new TicTacToeBoard();
 			currentState = RESUMEGAME;
 	}
@@ -44,7 +44,7 @@ public class GamePlay
 			else
 				return p2;
 	}
-	
+
 
 	public TicTacToeBoard getBoard()
 	{
@@ -55,8 +55,6 @@ public class GamePlay
 	{
 			board.resetBoard();
 			currentState = RESUMEGAME;
-			if(p2.getMode()==2)
-					p2.setCompRandArray(); //Reset the computer movement array.
 	}
 
 	/**

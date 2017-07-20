@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<project name="tictactoe" default="compile" basedir=".">
+
+	<target name="delete">
+		<delete dir="bin"/>
+		<delete dir="lib"/>
+	</target>
+
+	<path id="classpath">
+		<pathelement location="./lib/entities.jar" />
+		<pathelement location="bin"/>
+	</path>
+
+	<target name="create" depends="delete">
+		<mkdir dir="bin"/>
+		<mkdir dir="lib"/>
+	</target>
+
+
+	<target name="compile" depends="create">
+		<javac srcdir="./src/entities" destdir="./bin" includes="**/*.java" includeantruntime="false">
+		</javac>
+		<jar destfile="./lib/entities.jar" basedir="./bin/entities"></jar>
+		<javac classpathref="classpath" srcdir="./src/main" destdir="./bin" includes="**/*.java" includeantruntime="false">
+		</javac>
+	</target>
+</project>

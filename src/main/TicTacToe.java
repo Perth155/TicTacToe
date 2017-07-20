@@ -2,7 +2,7 @@ package main;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import entities.Enemy;
+import entities.AIPlayer;
 import entities.Player;
 
 /**
@@ -18,8 +18,10 @@ public class TicTacToe
 					GamePlay game = new GamePlay();
 					game.getBoard().drawExpandedBoard();
 					Scanner s1 = new Scanner(System.in);
-					newGameStarter(game, s1);
+					int mode = newGameStarter(game, s1);
 					boolean playOn = true;
+					if (mode>2)
+						playOn = false;
 
 					while(playOn)
 					{
@@ -32,9 +34,9 @@ public class TicTacToe
 							}
 							if(!playOn) //Break out of the while loop if playOn is no longer true.
 								break;
-							if(((Enemy) game.getPlayer(2)).getMode() == 2)//If the game is player vs computer.
+							if(mode == 2)//If the game is player vs computer.
 							{
-								compRandMovement(game, playerOneSelection);
+								aiMove(game);
 							}
 							else
 								movement(game, 2, s1);
@@ -88,60 +90,104 @@ public class TicTacToe
 
 
 
-			private static void compRandMovement(GamePlay game, int selection)
+			private static void aiMove(GamePlay game)
 			{
-				System.out.println("Computer's Turn...");
+				System.out.println("AI's Turn...");
 				try
 				{
 					TimeUnit.SECONDS.sleep(1);
 				} catch (InterruptedException e)
 				{
-					//
+					e.printStackTrace();
 				}
-				game.updateBoard(((Enemy) game.getPlayer(2)).movement(selection), game.getPlayer(2));
+				((AIPlayer)game.getPlayer(2)).setGameBoard(game.getBoard().getBoardStatus());
+				((AIPlayer)game.getPlayer(2)).callMiniMax(2);
+				game.updateBoard(((AIPlayer) game.getPlayer(2)).getBestMove(), game.getPlayer(2));
 				game.getBoard().drawBoard();
 				game.terminateGameCheck();
 			}
 
+
+			private static void printSelectionScreen()
+			{
+				System.out.println("+-----------------Select--------------------+");
+				System.out.println("| 1. Player1 vs Player2                     |");
+				System.out.println("| 2. Player1 vs AI [Impossible Mode]        |");
+				System.out.println("| 3. About                                  |");
+				System.out.println("| 4. Quit                                   |");
+				System.out.println("+-------------------------------------------+\nSelection:");
+			}
+
+			private static void printAboutScreen()
+			{
+				System.out.println("+------------------About---------------------+");
+				System.out.println("|This is a simple CLI based TicTacToe game   |");
+				System.out.println("|written in Java.                            |");
+				System.out.println("|If versing AI, it is unbeatable. Player can |");
+				System.out.println("|tie a game if playing perfectly, otherwise  |");
+				System.out.println("|game cannot be won.                         |");
+				System.out.println("|AI is implemented using MiniMax algorithm   |");
+				System.out.println("|Read: https://en.wikipedia.org/wiki/Minimax |");
+				System.out.println("|Author: Perth155 (abrar.a.amin@gmail.com)   |");
+				System.out.println("|URL: https://github.com/Perth155/tictactoe  |");
+				System.out.println("+--------------------------------------------+");
+			}
 
 			/**
 			 * Prints introduction, handles names of players and selection of modes.
 			 * @param Scanner for console input for player names and mode.
 			 * @param game, a GamePlay class object that handles the two players.
 			 */
-			private static void newGameStarter(GamePlay game, Scanner inScan)
+			private static int newGameStarter(GamePlay game, Scanner inScan)
 			{
-				System.out.println("------------------Select---------------------");
-				System.out.println("1. Player1 vs Player2");
-				System.out.println("2. Player1 vs Computer (Randomised)");
-				System.out.println("---------------------------------------------\nSelection:");
-				int mode = inScan.nextInt();
+				printSelectionScreen();
+				int mode;
+				try
+				{
+						mode = inScan.nextInt();
+				}
+				catch(Exception E)
+				{
+						System.err.println("Invalid Selection.");
+						mode = 4;
+				}
 				inScan.nextLine();
 
-				System.out.println("Player 1's name: ");
-				String name1 = inScan.nextLine();
+				String name1 = "";
+				if(mode < 3)
+				{
+					System.out.println("Player 1's name: ");
+					name1 = inScan.nextLine();
 
-				if(name1.equals(""))
-					name1 = "player1"; //Prevent "" named players to avoid confusion.
-
+					if(name1.equals(""))
+					{
+						name1 = "player1"; //Prevent "" named players to avoid confusion.
+						System.out.println("Player 1's name was set to "+name1+".");
+					}
+				}
 				String name2;
 				if(mode == 1) // Player1 vs Player2
 				{
 					System.out.println("Player 2's name: ");
 					name2 = inScan.nextLine();
 					if(name2.equals(""))
+					{
 						name2 = "player2";  //Handles empty string names.
+						System.out.println("Player 2's name was set to " + name2+".");
+					}
 					game.setUpGame(name1, 'X', name2, 'O', 1);
 				}
-				else
+				else if(mode == 2)
 				{
-					name2 = "Computer"; //Player1 vs PC
-					((Enemy)(game.getPlayer(2))).setMode(2);
-					System.out.println("Opponent's name was set to : 'Computer'");
-					game.setUpGame(name1, 'X', name2, 'O', 2);
+					System.out.println("Opponent's name was set to : 'AI'");
+					game.setUpGame(name1, 'X', "AI", 'O', 2);
 
 				}
-
+				else if(mode == 3)
+					printAboutScreen();
+				else
+					mode = 4;
+				return mode;
 			}
 
 

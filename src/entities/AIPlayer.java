@@ -121,7 +121,8 @@ public class AIPlayer extends Player
 				if(depth == 0)
 					this.childNodeMoveScores.add(new MoveScore(i, value));
 
-				if(depth == 0)System.out.println("Score for position "+(i+1)+" = "+value);
+				if(depth == 0)
+					System.out.println("Score for position "+(i)+" = "+value);
 				node[i] = '-';
 			}
 		}
