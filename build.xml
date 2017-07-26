@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <project name="tictactoe" default="compile" basedir=".">
 
-	<property name="main" value="main/TicTacToe"/>
+	<property name="main" value="gui/GBoard"/>
 
 	<path id="classpath">
 		<pathelement location="bin"/>
+		<pathelement location="res"/>
 	</path>
 
 	<target name="clean">
@@ -21,9 +22,14 @@
 		</javac>
 		<javac classpathref="classpath" srcdir="./src/main" destdir="./bin" includes="**/*.java" includeantruntime="false">
 		</javac>
+		<javac classpathref="classpath" srcdir="./src/gui" destdir="./bin" includes="GBoard.java" includeantruntime="false">
+		</javac>
 	</target>
 
 	<target name="run">
+		<copy todir="." overwrite="true">
+			<fileset dir="../res" includes="**/*.png"></fileset>
+		</copy>
 		<java classpath="classpath" classname="${main}" fork="yes">
 		</java>
 	</target>
