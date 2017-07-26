@@ -1,7 +1,7 @@
 # TicTacToe
 
 ## Description:
-A simple 2-player command line based Object Oriented tic-tac-toe game written in Java. An unbeatable AI has been implemented using [minimax algorithm](https://en.wikipedia.org/wiki/Minimax).
+A simple 2-player command line based (GUI currently added using Java's swing library) Object Oriented tic-tac-toe game written in Java. An unbeatable AI has been implemented using [minimax algorithm](https://en.wikipedia.org/wiki/Minimax).
 Currently supports game between two human players, or versing the computer (unbeatable AI).
 
 ## Requirements:
@@ -19,7 +19,11 @@ To automate the building process (with ant) a build script, ```build.xml``` has 
 ```
 $ ant compile
 ```
-To run the game from the ```bin``` directory, simply run: 
+To run the game (GUI) 
+```
+$ ant run -Dbasedir=bin
+```
+To run the game (CLI) from the ```bin``` directory, simply run: 
 ```
 $ java main.TicTacToe
 ```
@@ -29,5 +33,5 @@ $ java main.TicTacToe
 
 ## TODO:
 - [X] Implement an unbeatable AI using minimax algorithm, and allow human player to verse the computer. 
-- [X] Implement a GUI (optional).
+- [X] Implement a GUI using swing (optional).
 - [ ] Implement Alpha-Beta pruning to reduce number of nodes to be evaluated in the search tree by the minimax algorithm.
