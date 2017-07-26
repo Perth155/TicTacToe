@@ -8,13 +8,10 @@ Currently supports game between two human players, or versing the computer (unbe
 * [Java (Version 1.8)](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
 * [Apache Ant](http://ant.apache.org/)
 
-Install in a Debian and derivatives (e.g. Ubuntu; using apt)
+To install dependencies
 ```
-$ sudo apt-get install jdk8-openjdk jre8-openjdk ant
-```
-If using Arch Linux (pacman)
-```
-$ sudo pacman -S jdk8-openjdk jre8-openjdk apache-ant
+$ sudo apt-get install openjdk-8-jdk openjdk-8-jre ant  # Debian and derivatives (e.g. Ubuntu)
+$ sudo pacman -S jdk8-openjdk jre8-openjdk apache-ant # Arch Linux
 ```
 
 ## Compile and Run
@@ -32,5 +29,5 @@ $ java main.TicTacToe
 
 ## TODO:
 - [X] Implement an unbeatable AI using minimax algorithm, and allow human player to verse the computer. 
-- [ ] Implement a GUI (optional).
+- [X] Implement a GUI (optional).
 - [ ] Implement Alpha-Beta pruning to reduce number of nodes to be evaluated in the search tree by the minimax algorithm.
