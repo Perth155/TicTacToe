@@ -9,7 +9,7 @@ public class Player
 		private int points;  // The final points of the player. Each win increments point by 1.
 		protected char symbol;  // 'X' or 'O' - what the player chooses.
 		protected char oppSymbol;
-
+		
 		//Constructors
 		public Player()
 		{
@@ -50,6 +50,11 @@ public class Player
 		{
 				points = inPoint;
 		}
+		
+		public void setSymbol(char s)
+		{
+		        symbol = s;
+		}
 
 
 		public String getName()
@@ -65,6 +70,11 @@ public class Player
 		public char getSymbol()
 		{
 				return this.symbol;
+		}
+		
+		public char getOppositeSymbol()
+		{
+				return this.oppSymbol;
 		}
 
 

@@ -44,7 +44,7 @@ public class GamePlay
 			else
 				return p2;
 	}
-
+	
 
 	public TicTacToeBoard getBoard()
 	{

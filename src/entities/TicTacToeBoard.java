@@ -7,8 +7,6 @@ import java.util.Arrays;
 **/
 public class TicTacToeBoard
 {
-
-		private static final String HEADER = "\n ______________________\n";   // Used to Print the board header when the draw() method is invoked.
 		private static final int ROW = 3; // Num of rows used in the 3*3 array of chars.
 		private static final int COL = 3; // Num of cols used in the 3*3 array of characters.
 		private static final char DEFAULT = '-'; // Default value to be stored in the array of chars.
@@ -58,72 +56,48 @@ public class TicTacToeBoard
 		* Prints out the current state of the tic-tac-toe board to the console.
 		* Using nexted FOR loops to iterate through the 2D array containing the
 		* current boardStatus.
+		* @param i, an integer that specifies whether to draw normal board or expanded board.
 		*/
-		public void drawBoard()
+		public void drawBoard(int mode)
 		{
-				System.out.print("\n ------tic-tac-toe------");  // Prints title of the game.
-				System.out.println(HEADER);
+				int count = 0;
+				System.out.println("\n ----tic-tac-toe-----\n");  // Prints title of the game.
 
 				for(int i = 0; i<boardStatus.length; i++)
 				{
-					System.out.print(" | ");
 					for(int j = 0; j<boardStatus[i].length; j++)
 					{
+						if(j == 0)
+							System.out.print("  ");
 						if(boardStatus[i][j] == DEFAULT)
-						{
-							System.out.print("     | ");
+						{	
+							if(mode == 1)
+								System.out.print("     ");
+							else
+								System.out.print(" ["+count+"] ");
 						}
-
 						else if(boardStatus[i][j] == 'X')
 						{
-							System.out.print("  "+'X'+"  | ");
+							System.out.print("  "+'X'+"  ");
 						}
 
 						else
 						{
-							System.out.print("  "+'O'+"  | ");
+							System.out.print("  "+'O'+"  ");
 						}
+						count++;
+						if(j < 2)
+							System.out.print("| ");
+						else
+							System.out.print("  ");
 					}
-					System.out.println(HEADER);
-			}
-	}
-
-
-	public void drawExpandedBoard()
-	{
-			//refresh(); // Clears the console
-			int count = 0;
-
-			System.out.print("\n ------tic-tac-toe------");  // Prints title of the game.
-			System.out.println(HEADER);
-
-			for(int i = 0; i<boardStatus.length; i++)
-			{
-				System.out.print(" | ");
-				for(int j = 0; j<boardStatus[i].length; j++)
-				{
-					if(boardStatus[i][j] == DEFAULT)
-					{
-						System.out.print(" <"+count+"> | ");
-					}
-
-					else if(boardStatus[i][j] == 'X')
-					{
-						System.out.print("  "+'X'+"  | ");
-					}
-
+					if(i != boardStatus.length-1)
+						System.out.println("\n ------+------+------");
 					else
-					{
-						System.out.print("  "+'O'+"  | ");
-					}
-					count++;
+						System.out.println("\n");
 			}
 
-			System.out.println(HEADER);
-		}
 	}
-
-
 
 	/**
 	* Converts the console input from the user- an int between 0 to 9

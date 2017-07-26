@@ -16,7 +16,7 @@ public class TicTacToe
 			public static void main(String[] args)
 			{
 					GamePlay game = new GamePlay();
-					game.getBoard().drawExpandedBoard();
+					game.getBoard().drawBoard(2);
 					Scanner s1 = new Scanner(System.in);
 					int mode = newGameStarter(game, s1);
 					boolean playOn = true;
@@ -46,8 +46,8 @@ public class TicTacToe
 					}
 					System.exit(0);
 			}
-
-
+			
+			
 
 			private static boolean checkReset(GamePlay game, Scanner s1)
 			{
@@ -58,7 +58,7 @@ public class TicTacToe
 					if(!(resetSelection.equals("N")|| resetSelection.equals("n") || resetSelection.equals("No")))
 					{
 						game.resetGame();
-						game.getBoard().drawBoard();
+						game.getBoard().drawBoard(1);
 						return true;
 					}
 					return false;
@@ -78,18 +78,18 @@ public class TicTacToe
 				while(!(game.getBoard().checkValidityOfMove(select)))
 				{
 					System.out.println("Invalid Selection.");
-					game.getBoard().drawExpandedBoard();
+					game.getBoard().drawBoard(2);
 					select = getSelection(game, inScan, game.getPlayer(i));
 				}
 				game.updateBoard(select, game.getPlayer(i));
-				game.getBoard().drawBoard();
+				game.getBoard().drawBoard(1);
 				game.terminateGameCheck();
 
 				return select;
 			}
 
 
-
+			
 			private static void aiMove(GamePlay game)
 			{
 				System.out.println("AI's Turn...");
@@ -103,21 +103,21 @@ public class TicTacToe
 				((AIPlayer)game.getPlayer(2)).setGameBoard(game.getBoard().getBoardStatus());
 				((AIPlayer)game.getPlayer(2)).callMiniMax(2);
 				game.updateBoard(((AIPlayer) game.getPlayer(2)).getBestMove(), game.getPlayer(2));
-				game.getBoard().drawBoard();
+				game.getBoard().drawBoard(1);
 				game.terminateGameCheck();
 			}
-
-
+			
+			
 			private static void printSelectionScreen()
 			{
-				System.out.println("+-----------------Select--------------------+");
-				System.out.println("| 1. Player1 vs Player2                     |");
-				System.out.println("| 2. Player1 vs AI [Impossible Mode]        |");
-				System.out.println("| 3. About                                  |");
-				System.out.println("| 4. Quit                                   |");
-				System.out.println("+-------------------------------------------+\nSelection:");
+				System.out.println("+------------------Select--------------------+");
+				System.out.println("| 1. Player1 vs Player2                      |");
+				System.out.println("| 2. Player1 vs AI [Impossible Mode]         |");
+				System.out.println("| 3. About                                   |");
+				System.out.println("| 4. Quit                                    |");
+				System.out.println("+--------------------------------------------+\nSelection:");
 			}
-
+			
 			private static void printAboutScreen()
 			{
 				System.out.println("+------------------About---------------------+");
@@ -145,16 +145,15 @@ public class TicTacToe
 				try
 				{
 						mode = inScan.nextInt();
-				}
-				catch(Exception E)
+				}catch(Exception E)
 				{
 						System.err.println("Invalid Selection.");
 						mode = 4;
 				}
 				inScan.nextLine();
-
+				
 				String name1 = "";
-				if(mode < 3)
+				if(mode < 3 && mode > 0)
 				{
 					System.out.println("Player 1's name: ");
 					name1 = inScan.nextLine();
@@ -181,7 +180,7 @@ public class TicTacToe
 				{
 					System.out.println("Opponent's name was set to : 'AI'");
 					game.setUpGame(name1, 'X', "AI", 'O', 2);
-
+					
 				}
 				else if(mode == 3)
 					printAboutScreen();
@@ -200,7 +199,7 @@ public class TicTacToe
 			{
 				int selection;
 				System.out.println(currentPlayer.getName()+"'s Turn.");
-				System.out.println("Enter an unoccupied slot between 0 and 8, or h to see the positions.");
+				System.out.println("Enter an unoccupied slot between 0 and 8, or any other key to see the positions.");
 
 
 
@@ -209,7 +208,7 @@ public class TicTacToe
 				while(select.equals("h") || select.equals("H"))
 				{
 					System.out.println("-Help Menu Invoked-");
-					game.getBoard().drawExpandedBoard();
+					game.getBoard().drawBoard(1);
 					System.out.println("Enter an unoccupied slot between 0 and 8, or h for help.");
 					select = inScan.nextLine();
 				}
