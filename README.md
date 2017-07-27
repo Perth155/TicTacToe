@@ -1,5 +1,5 @@
 # TicTacToe
-
+Try the game [here]()
 ## Description:
 A simple 2-player command line based (GUI currently added using Java's swing library) Object Oriented tic-tac-toe game written in Java. An unbeatable AI has been implemented using [minimax algorithm](https://en.wikipedia.org/wiki/Minimax).
 Currently supports game between two human players, or versing the computer (unbeatable AI).
@@ -15,23 +15,24 @@ $ sudo pacman -S jdk8-openjdk jre8-openjdk apache-ant # Arch Linux
 ```
 
 ## Compile and Run
-To automate the building process (with ant) a build script, ```build.xml``` has been included. To compile all java files:
+To automate the building process (with ant) a build script, ```build.xml``` has been included. To compile all java files and to create a JAR file:
 ```
 $ ant compile
+$ ant make_gui_jar
 ```
-To run the game (GUI) 
+To run the game [GUI]
 ```
-$ ant run -Dbasedir=bin
+$ java -jar GTic.jar
 ```
-To run the game (CLI) from the ```bin``` directory, simply run: 
+To run a CLI version of the game, from the ```bin``` directory, simply run:
 ```
 $ java main.TicTacToe
 ```
 
 ## Known bugs:
-* Game crashes with any non-integer console input by user. 
+* Game crashes with any non-integer console input by user.
 
 ## TODO:
-- [X] Implement an unbeatable AI using minimax algorithm, and allow human player to verse the computer. 
+- [X] Implement an unbeatable AI using minimax algorithm, and allow human player to verse the computer.
 - [X] Implement a GUI using swing (optional).
 - [ ] Implement Alpha-Beta pruning to reduce number of nodes to be evaluated in the search tree by the minimax algorithm.

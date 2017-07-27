@@ -1,14 +1,16 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project name="tictactoe" default="compile" basedir=".">
 
-	<property name="main" value="gui/GBoard"/>
+	<property name="main" value="gui.GBoard"/>
+	<property name="applet" value="gui.Applet"/>
+	<property name="dir.jarfile" value="."/>
 
 	<path id="classpath">
 		<pathelement location="bin"/>
 		<pathelement location="res"/>
 	</path>
 
-	<target name="clean">
+	<target name="clean" description="remove binaries dir">
 		<delete dir="bin"/>
 	</target>
 
@@ -33,6 +35,19 @@
 		<java classpath="classpath" classname="${main}" fork="yes">
 		</java>
 	</target>
+
+
+	<target name="make_gui_jar" description="Export the project as a jar.">
+		<jar destfile="${dir.jarfile}/GTic.jar" filesetmanifest="mergewithoutmain">
+			<manifest>
+				<attribute name="Main-Class" value="${main}"/>
+				<attribute name="Class-Path" value="."/>
+			</manifest>
+			<fileset dir="./bin"/>
+			<fileset dir="./res"/>
+		</jar>
+	</target>
+
 
 
 </project>
