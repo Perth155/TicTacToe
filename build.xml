@@ -10,7 +10,8 @@
 		<pathelement location="res"/>
 	</path>
 
-	<target name="clean" description="remove binaries dir">
+	<target name="clean" description="remove binaries dir and jar file">
+		<delete dir="${dir.jarfile}" includes="**/GTic.jar"/>
 		<delete dir="bin"/>
 	</target>
 
@@ -19,25 +20,15 @@
 	</target>
 
 
-	<target name="compile" depends="create" description="compile java source code.">
+	<target name="compile" depends="create" description="compile java source code. Create a single JAR file containing all binaries and res.">
+		<!-- Compile all java files -->
 		<javac srcdir="./src/entities" destdir="./bin" includes="**/*.java" includeantruntime="false">
 		</javac>
 		<javac classpathref="classpath" srcdir="./src/main" destdir="./bin" includes="**/*.java" includeantruntime="false">
 		</javac>
 		<javac classpathref="classpath" srcdir="./src/gui" destdir="./bin" includes="GBoard.java" includeantruntime="false">
 		</javac>
-	</target>
-
-	<target name="run">
-		<copy todir="." overwrite="true">
-			<fileset dir="../res" includes="**/*.png"></fileset>
-		</copy>
-		<java classpath="classpath" classname="${main}" fork="yes">
-		</java>
-	</target>
-
-
-	<target name="make_gui_jar" description="Export the project as a jar.">
+		<!-- Create a JAR which can be used to run the program -->
 		<jar destfile="${dir.jarfile}/GTic.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
 				<attribute name="Main-Class" value="${main}"/>
@@ -47,7 +38,6 @@
 			<fileset dir="./res"/>
 		</jar>
 	</target>
-
 
 
 </project>

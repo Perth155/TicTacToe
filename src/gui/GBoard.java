@@ -50,9 +50,9 @@ public class GBoard extends JFrame
 	   private boolean active;
 	   private AIPlayer ai;
 
-	   public GBoard()
+	   public GBoard(String title)
 	   {
-		   super();
+		   super(title);
 		   setUpButtons();
 		   activePlayer = PLAYER_X;
 		   active = true;
@@ -60,10 +60,6 @@ public class GBoard extends JFrame
 		   Arrays.fill(gameBoard, '-');
 		   gameOver = false;
 		   setBounds(0,0, WIDTH, HEIGHT+250);
-		   setLocationRelativeTo(null);
-		   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		   setTitle(TITLE);
-		   setResizable(false);
 		   importImages();
 		   im = new ImageManager();
 		   ai = new AIPlayer();
@@ -120,13 +116,13 @@ public class GBoard extends JFrame
 	   private void importImages()
 	   {
 		   try{
-			   board = ImageIO.read(getClass().getResourceAsStream("/board.png"));
-			   cross = ImageIO.read(getClass().getResourceAsStream("/cross.png"));
-			   naught = ImageIO.read(getClass().getResourceAsStream("/naught.png"));
-			   playerXIcon = ImageIO.read(getClass().getResourceAsStream("/small_cross.png"));
-			   playerOIcon = ImageIO.read(getClass().getResourceAsStream("/small_naught.png"));
-			   victoryCross = ImageIO.read(getClass().getResourceAsStream("/green_cross.png"));
-			   victoryNaught = ImageIO.read(getClass().getResourceAsStream("/green_naught.png"));
+			   board = ImageIO.read(getClass().getResourceAsStream("/images/board.png"));
+			   cross = ImageIO.read(getClass().getResourceAsStream("/images/cross.png"));
+			   naught = ImageIO.read(getClass().getResourceAsStream("/images/naught.png"));
+			   playerXIcon = ImageIO.read(getClass().getResourceAsStream("/images/small_cross.png"));
+			   playerOIcon = ImageIO.read(getClass().getResourceAsStream("/images/small_naught.png"));
+			   victoryCross = ImageIO.read(getClass().getResourceAsStream("/images/green_cross.png"));
+			   victoryNaught = ImageIO.read(getClass().getResourceAsStream("/images/green_naught.png"));
 		   }catch(IOException e)
 		   {
 			   e.printStackTrace();
@@ -426,7 +422,10 @@ public class GBoard extends JFrame
 	   	 public static void main(String[] args)
 	   	 {
 
-	   		 GBoard gb = new GBoard();
+	   		 GBoard gb = new GBoard(TITLE);
+				 gb.setLocationRelativeTo(null);
+				 gb.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				 gb.setResizable(false);
 	   		 gb.setVisible(true);
 	   	 }
 

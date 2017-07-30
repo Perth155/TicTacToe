@@ -15,10 +15,9 @@ $ sudo pacman -S jdk8-openjdk jre8-openjdk apache-ant # Arch Linux
 ```
 
 ## Compile and Run
-To automate the building process (with ant) a build script, ```build.xml``` has been included. To compile all java files and to create a JAR file:
+To automate the building process (with ant) a build script, ```build.xml``` has been included. To compile all java files and to create a JAR file containing all the binaries and resources:
 ```
 $ ant compile
-$ ant make_gui_jar
 ```
 To run the game [GUI]
 ```
