@@ -5,13 +5,13 @@ A simple 2-player command line based (GUI currently added using Java's swing lib
 Currently supports game between two human players, or versing the computer (unbeatable AI).
 
 ## Requirements:
-* [Java (Version 1.8)](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+* [Java (JDK 1.8)](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
 * [Apache Ant](http://ant.apache.org/)
 
 To install dependencies
 ```
-$ sudo apt-get install openjdk-8-jdk openjdk-8-jre ant  # Debian and derivatives (e.g. Ubuntu)
-$ sudo pacman -S jdk8-openjdk jre8-openjdk apache-ant # Arch Linux
+$ sudo apt-get install openjdk-8-jdk ant  # Debian and derivatives (e.g. Ubuntu)
+$ sudo pacman -S jdk8-openjdk apache-ant # Arch Linux
 ```
 
 ## Compile and Run
