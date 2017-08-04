@@ -1,5 +1,5 @@
 # TicTacToe
-![tictactoe](https://i.imgur.com/yUZLLkE.png)
+![tictactoe](https://i.imgur.com/QjAmQxg.png)
 ## Description:
 A simple 2-player command line based (GUI currently added using Java's swing library) Object Oriented tic-tac-toe game written in Java. An unbeatable AI has been implemented using [minimax algorithm](https://en.wikipedia.org/wiki/Minimax).
 Currently supports game between two human players, or versing the computer (unbeatable AI).
@@ -29,7 +29,7 @@ $ java main.TicTacToe
 ```
 
 ## Known bugs:
-* Game crashes with any non-integer console input by user.
+* Scaling issues if screen resolution is below 1440 x 900.
 
 ## TODO:
 - [X] Implement an unbeatable AI using minimax algorithm, and allow human player to verse the computer.
