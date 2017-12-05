@@ -1,3 +1,20 @@
+# Test file
 Test.java
+
+# Compiled class files
 *.class
+/bin/
+
+# log
+*.log
+
+# packages
+*.tar.gz
 *.jar
+*.zip
+
+# VIM temp files
+*.swp
+
+# IntelliJ Idea config files
+/.idea/
