@@ -1,6 +1,6 @@
-package ttt_cli.agent;
+package io.github.perth155.ttt_cli.agent;
 
-import ttt_cli.util.Symbol;
+import io.github.perth155.ttt_cli.util.Symbol;
 import java.util.Scanner;
 
 /**
@@ -25,18 +25,18 @@ public class HumanPlayer extends TTTAgent
 	@Override 
 	public int move(Symbol gameBoard[][])
 	{
-		System.out.print("[*] Select an unoccupied slot [0-8]: ");
+		int playLimit = (gameBoard.length*gameBoard[0].length)-1;
+		System.out.print("[*] Select an unoccupied slot [0-"+playLimit+"]: ");
 		int movement = -1;
 
-		while(true) {
+		while(movement < 0 || movement > playLimit) {
 			try {
 				movement = sc.nextInt();
 			} catch (Exception e) {
-				System.out.println("Invalid Input! Select an unoccupied slot [0-8]: ");
-				e.printStackTrace();
+				System.out.println("Invalid Input! Select an unoccupied slot [0-"+playLimit+"]: ");
 			}
-			return movement;
 		}
+		return movement;
 	}
 
 	/**

@@ -1,6 +1,6 @@
-package ttt_cli.agent;
+package io.github.perth155.ttt_cli.agent;
 
-import ttt_cli.util.Symbol;
+import io.github.perth155.ttt_cli.util.Symbol;
 
 /**
 * An abstract class for Player, any implementations of Agent must 

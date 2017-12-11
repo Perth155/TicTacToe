@@ -1,4 +1,4 @@
-package ttt_cli.util;
+package io.github.perth155.ttt_cli.util;
 
 import java.util.Arrays;
 
@@ -9,21 +9,20 @@ import java.util.Arrays;
 
 public class TicTacToeBoard
 {
-	//constants
-	private static final int ROW = 3; // Num of rows used in the 3*3 array of chars.
-	private static final int COL = 3; // Num of cols used in the 3*3 array of characters.
-	private static final Symbol DEFAULT = Symbol.EMPTY; // Default value to be stored in the array of chars.
-
 	//class-fields
 	private Symbol boardStatus[][]; // 2D array of chars.
+	private int row;
+	private int col;
 		
 	/**
 	* Constructor, sets up an empty board for a new game.
 	**/
-	public TicTacToeBoard()
+	public TicTacToeBoard(int inRow, int inCol)
 	{
-		boardStatus = new Symbol[ROW][COL];
-		for(int i = 0; i<ROW; i++)
+		this.row = inRow;
+		this.col = inCol;
+		boardStatus = new Symbol[row][col];
+		for(int i = 0; i<row; i++)
 		{
 			Arrays.fill(boardStatus[i], Symbol.EMPTY );  // Initialize every single element of the rows of array as '-'.
 		}
@@ -34,7 +33,7 @@ public class TicTacToeBoard
 	 */
 	public void resetBoard()
 	{
-		for(int i = 0; i<ROW; i++)
+		for(int i = 0; i<row; i++)
 		{
 			Arrays.fill(boardStatus[i], Symbol.EMPTY );  // Initialize every single element of the rows of array as '-'.
 		}
@@ -71,7 +70,7 @@ public class TicTacToeBoard
 	public void drawBoard(int mode)
 	{
 		int count = 0;
-		System.out.println("\n ----tic-tac-toe-----\n");  // Prints title of the game.
+		System.out.println("\n -----tic-tac-toe-----\n");  // Prints title of the game.
 
 		for(int i = 0; i<boardStatus.length; i++)
 		{
@@ -79,7 +78,7 @@ public class TicTacToeBoard
 			{
 				if(j == 0)
 					System.out.print("  ");
-				if(boardStatus[i][j] == DEFAULT)
+				if(boardStatus[i][j] == Symbol.EMPTY)
 				{	
 					if(mode == 1)
 						System.out.print("     ");
@@ -111,20 +110,6 @@ public class TicTacToeBoard
 
 	}
 
-	
-	/**
-	 * A function that erases the drawn TicTacToe board to be called once a new turn 
-	 * has been played and the board is to be re-rendered.
-	 */
-	public void eraseBoard()
-	{
-		int count = 9;
-		for(int i = 0; i < count; i++)
-		{
-			System.out.print(String.format("\033[%dA", 1)); // Move up
-			System.out.print("\033[2K"); // Erase line content
-		}
-	}
 
 
 	/**
@@ -146,11 +131,11 @@ public class TicTacToeBoard
 	*/
 	public boolean isFull()
 	{
-		for(int i = 0; i<ROW; i++)
+		for(int i = 0; i<row; i++)
 		{
-			for(int j = 0; j<COL; j++)
+			for(int j = 0; j<col; j++)
 			{
-				if(boardStatus[i][j] == DEFAULT)
+				if(boardStatus[i][j] == Symbol.EMPTY)
 				{
 					return false;
 				}

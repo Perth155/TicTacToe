@@ -1,4 +1,4 @@
-package ttt_cli.util;
+package io.github.perth155.ttt_cli.util;
 
 public enum Symbol {
     X,

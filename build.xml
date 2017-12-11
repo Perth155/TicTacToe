@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project name="tictactoe" default="compile" basedir=".">
+<project name="TicTacToe" default="compile" basedir=".">
+<!-- Author: Abrar Amin (abrar.a.amin@gmail.com)-->
 
-	<property name="main" value="gui.GBoard"/>
-	<property name="applet" value="gui.Applet"/>
-	<property name="dir.jarfile" value="."/>
+	<property name="src_path" value="src/main/io/github/perth155/ttt_cli"/>
+	<property name="main_cli" value="io.github.perth155.ttt_cli.TicTacToe"/>
+	<property name="dir.jarfile" value="./target"/>
+	<property name="project_name" value="TicTacToe"/>
+	<property name="version" value="1.1.0"/>
 
 	<path id="classpath">
 		<pathelement location="bin"/>
 		<pathelement location="res"/>
+		<pathelement location="${src.path}/agent"/>
+		<pathelement location="${src.path}/util"/>
 	</path>
 
-	<target name="clean" description="remove binaries dir and jar file">
-		<delete dir="${dir.jarfile}" includes="**/GTic.jar"/>
+	<target name="clean" description="remove dependencies and build directories.">
+		<delete dir="${dir.jarfile}"/>
 		<delete dir="bin"/>
 	</target>
 
-	<target name="create" depends="clean">
+	<target name="create" depends="clean" description="create directories">
 		<mkdir dir="bin"/>
+		<mkdir dir="target"/>
 	</target>
 
-
-	<target name="compile" depends="create" description="compile java source code. Create a single JAR file containing all binaries and res.">
+	<target name="compile" description="compile java source code.">
 		<!-- Compile all java files -->
-		<javac srcdir="./src/entities" destdir="./bin" includes="**/*.java" includeantruntime="false">
+		<javac srcdir="./${src_path}/util" destdir="./bin" includes="**/*.java" includeantruntime="false">
 		</javac>
-		<javac classpathref="classpath" srcdir="./src/main" destdir="./bin" includes="**/*.java" includeantruntime="false">
+		<javac classpathref="classpath" srcdir="./${src_path}/agent" destdir="./bin" includes="**/*.java" includeantruntime="false">
 		</javac>
-		<javac classpathref="classpath" srcdir="./src/gui" destdir="./bin" includes="GBoard.java" includeantruntime="false">
+		<javac classpathref="classpath" srcdir="./${src_path}" destdir="./bin" includes="**/*.java" includeantruntime="false">
 		</javac>
-		<!-- Create a JAR which can be used to run the program -->
-		<jar destfile="${dir.jarfile}/GTic.jar" filesetmanifest="mergewithoutmain">
+	</target>
+
+	<target name="package" depends="compile" description="create a JAR file which can be used to run the program.">
+		<jar destfile="${dir.jarfile}/${project_name}-${version}.jar" filesetmanifest="mergewithoutmain">
 			<manifest>
-				<attribute name="Main-Class" value="${main}"/>
+				<attribute name="Main-Class" value="${main_cli}"/>
 				<attribute name="Class-Path" value="."/>
 			</manifest>
 			<fileset dir="./bin"/>
 			<fileset dir="./res"/>
 		</jar>
 	</target>
-
 
 </project>

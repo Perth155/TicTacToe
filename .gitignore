@@ -1,9 +1,10 @@
-# Test file
-Test.java
-
 # Compiled class files
 *.class
 /bin/
+/target/
+
+# Dependencies
+/lib/
 
 # log
 *.log

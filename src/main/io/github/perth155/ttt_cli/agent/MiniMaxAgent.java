@@ -1,7 +1,6 @@
-package ttt_cli.agent;
+package io.github.perth155.ttt_cli.agent;
 
-import ttt_cli.util.Symbol;
-
+import io.github.perth155.ttt_cli.util.Symbol;
 import java.util.List;
 import java.util.LinkedList;
 

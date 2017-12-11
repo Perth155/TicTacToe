@@ -1,9 +1,8 @@
-package ttt_cli;
+package io.github.perth155.ttt_cli;
 
 import java.util.Scanner;
-import org.apache.commons.cli.*;
-import ttt_cli.agent.*;
-import ttt_cli.util.*;
+import io.github.perth155.ttt_cli.agent.*;
+import io.github.perth155.ttt_cli.util.*;
 
 /**
 * Contains the main method used to run this game.
@@ -12,7 +11,6 @@ import ttt_cli.util.*;
 
 public class TicTacToe {
 
-	private static final int HARD_CODED_BOARD_DIMENSION = 3; //to do: use opt parse.
 
 	/**
 	 * Display the player selection option to console.
@@ -25,12 +23,10 @@ public class TicTacToe {
 		System.out.println("+--------------------------------------------+\nPlayer Selection [Default = 3]:");
 	}
 
-
 	/**
 	 * Set up each player that will be playing the game from the list of available agents
 	 * via stdin
-	 *
-	 * @param scin         the Scanner passed from main method to read console input.
+	 * @param scin the Scanner passed from main method to read console input.
 	 * @param playerNumber the player currently being set up, p1 or p2.
 	 * @return The player object that has been successfully set up.
 	 */
@@ -78,7 +74,6 @@ public class TicTacToe {
 
 	/**
 	 * Display the final results to console, and check if the game should be reset.
-	 *
 	 * @param tb
 	 * @param s1
 	 * @return true if game is to be reset, false otherwise.
@@ -179,9 +174,13 @@ public class TicTacToe {
 	}
 
 
-	private static void localGame()
+	/**
+	 * Start a 1v1 game on the same machine.
+	 * @param boardDimension the dimensions of the gameboard, 3x3 to 6x6.
+	 */
+	private static void localGame(int boardDimension)
 	{
-		TicTacToeBoard board = new TicTacToeBoard();
+		TicTacToeBoard board = new TicTacToeBoard(boardDimension, boardDimension);
 		Scanner scin = new Scanner(System.in);
 		TTTAgent p1 = setUpPlayer(scin, 1);
 		TTTAgent p2 = setUpPlayer(scin, 2);
@@ -192,10 +191,10 @@ public class TicTacToe {
 
 		while (playOn) {
 			int spot = makeMove(p1, board);
-			if (checkWin(board.getBoardStatus(), spot, HARD_CODED_BOARD_DIMENSION) == p1.getSymbol()) {
+			if (checkWin(board.getBoardStatus(), spot, boardDimension) == p1.getSymbol()) {
 				winner = p1;
 				playOn = false;
-			} else if (movesPlayed == (HARD_CODED_BOARD_DIMENSION * HARD_CODED_BOARD_DIMENSION)-1 && board.isFull()) {
+			} else if (movesPlayed == (boardDimension * boardDimension)-1 && board.isFull()) {
 				playOn = false; // match tied.
 			} else {
 				movesPlayed++;
@@ -203,14 +202,14 @@ public class TicTacToe {
 			// player2 makes a move.
 			if (playOn) {
 				spot = makeMove(p2, board);
-				if (checkWin(board.getBoardStatus(), spot, HARD_CODED_BOARD_DIMENSION) == p2.getSymbol()) {
+				if (checkWin(board.getBoardStatus(), spot, boardDimension) == p2.getSymbol()) {
 					winner = p2;
 					playOn = false;
 				} else {
 					movesPlayed++;
 				}
 			}
-			if (playOn == false) {
+			if (!playOn) {
 				displayEndGameResult(winner);
 				movesPlayed = 0;
 				playOn = checkReset(board, scin);
@@ -219,16 +218,10 @@ public class TicTacToe {
 	}
 
 
-	public static void main(String[] args) {
-		Options opt = new Options();
-		// board size specified by user.
-		Option boardSiz = new Option("s", "size", true, "TicTacToe board dimensions, 3-5");
-		boardSiz.setRequired(false);
-		opt.addOption(boardSiz);
-
-
-
-		localGame();
+	public static void main(String[] args) 
+	{
+		int boardDim = 3;
+		localGame(boardDim);
 		System.exit(0);
 	}
 }
