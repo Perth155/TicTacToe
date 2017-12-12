@@ -82,19 +82,19 @@ public class TicTacToeBoard
 				if(boardStatus[i][j] == Symbol.EMPTY)
 				{	
 					if(mode == 1)
-						System.out.print("     ");
+						System.out.print("       ");
 					else
-						System.out.print(" ["+count+"] ");
+						System.out.print("  ["+count+"]  ");
 				}
 						
 				else if(boardStatus[i][j] == Symbol.X)
 				{
-					System.out.print("  "+'X'+"  ");
+					System.out.print(Color.BLACK+Color.WHITE_BG+"   X   "+Color.RESET);
 				}
 
 				else
 				{
-					System.out.print("  "+'O'+"  ");
+					System.out.print(Color.WHITE+Color.BLACK_BG+"   O   "+Color.RESET);
 				}
 				count++;
 				
@@ -108,9 +108,9 @@ public class TicTacToeBoard
 				System.out.print("\n ");
 				for(int k = 0; k < boardStatus.length-1; k++)
 				{
-					System.out.print("------+");
+					System.out.print("--------+");
 				}
-				System.out.print("------\n");
+				System.out.print("--------\n");
 			}
 			else
 				System.out.println("\n");

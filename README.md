@@ -8,6 +8,8 @@ Currently supports game between two human players, or versing the computer (Rand
 ## Requirements:
 * [Java (JDK 1.8)](http://openjdk.java.net/install/)
 * [Apache Ant](http://ant.apache.org/)
+### Windows
+* PowerShell/ Git BASH/ Cygwin
 
 ### To install dependencies:
 Debian/ Ubuntu/ Linux Mint :
@@ -38,7 +40,3 @@ $ java -jar target/TicTacToe-1.1.0.jar
 ```
 To adjust board dimensions (CLI only) edit the ```res/.prop``` file and rebuild.
 
-## TODO:
-- [X] Implement an unbeatable AI using minimax algorithm, and allow human player to verse the computer.
-- [X] Implement a GUI using swing package (optional).
-- [X] Implement Alpha-Beta pruning to reduce number of nodes to be evaluated in the search tree by the minimax algorithm.

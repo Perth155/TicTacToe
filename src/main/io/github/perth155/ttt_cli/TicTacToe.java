@@ -196,7 +196,7 @@ public class TicTacToe
 		Scanner scin = new Scanner(System.in);
 		TTTAgent p1 = setUpPlayer(scin, 1);
 		TTTAgent p2 = setUpPlayer(scin, 2);
-		board.drawBoard(1);
+		board.drawBoard(0);
 		boolean playOn = true;
 		int movesPlayed = 0;
 		TTTAgent winner = null;
