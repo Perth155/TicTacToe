@@ -1,6 +1,9 @@
 package io.github.perth155.ttt_cli;
 
 import java.util.Scanner;
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.IOException;
 import io.github.perth155.ttt_cli.agent.*;
 import io.github.perth155.ttt_cli.util.*;
 
@@ -9,9 +12,9 @@ import io.github.perth155.ttt_cli.util.*;
 * @author abraram (abrar.a.amin@gmail.com)
 */
 
-public class TicTacToe {
-
-
+public class TicTacToe
+{
+	
 	/**
 	 * Display the player selection option to console.
 	 */
@@ -60,7 +63,9 @@ public class TicTacToe {
 		return outPlayer;
 	}
 
-
+	/**
+	 * Print out the final game results.
+	 */
 	private static void displayEndGameResult(TTTAgent p) {
 		System.out.println("Game Over!\n");
 		if (p == null)
@@ -70,6 +75,8 @@ public class TicTacToe {
 		else
 			System.out.println("Player 2: " + p.getName() + " {O} wins!");
 	}
+
+	
 
 
 	/**
@@ -161,13 +168,18 @@ public class TicTacToe {
 	/**
 	 * Calls the ,move method of Player class and uses the int to update the
 	 * gameboard accordingly.
-	 *
 	 * @param player p1 or p2.
 	 * @return the players selection
 	 */
 	private static int makeMove(TTTAgent player, TicTacToeBoard board) {
 		System.out.println("Turn for " + player.getName() + " [" +player.getSymbol().toString() + "]");
-		int spot = player.move(board.getBoardStatus()); // player1 makes a move.
+		int spot = player.move(board.getBoardStatus()); // player makes a move.
+
+		while(!board.checkValidityOfMove(spot))
+		{
+			System.out.println("You selected an occupied spot. Select again: ");
+			spot = player.move(board.getBoardStatus());
+		}
 		board.setBoard(spot, player.getSymbol()); // update game board with player's move.
 		board.drawBoard(0);
 		return spot;
@@ -215,12 +227,21 @@ public class TicTacToe {
 				playOn = checkReset(board, scin);
 			}
 		}
+		p1.destroy();
+		p2.destroy();
 	}
 
 
 	public static void main(String[] args) 
 	{
-		int boardDim = 3;
+		Properties properties = new Properties();
+		try {
+			properties.load(new FileInputStream("res/.prop"));
+		} catch (IOException e) {
+			System.err.println("ERR: Couldn't load properties file!");
+			System.exit(1);
+		}
+		int boardDim = Integer.parseInt(properties.getProperty("BOARD_DIMENSIONS"));
 		localGame(boardDim);
 		System.exit(0);
 	}

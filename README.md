@@ -26,7 +26,7 @@ Windows
 ## Compile and Run
 To automate the building process (with ant) a build script, ```build.xml``` has been included. To compile all java files and to create a runnable JAR file containing all the binaries and resources:
 ```
-$ ant package
+$ ant package 
 ```
 To run the game with a GUI:
 ```
@@ -36,9 +36,7 @@ To run a CLI version of the game:
 ```
 $ java -jar target/TicTacToe-1.1.0.jar
 ```
-
-## Known bugs:
-See [Issues](https://github.com/Perth155/TicTacToe)
+To adjust board dimensions (CLI only) edit the ```res/.prop``` file and rebuild.
 
 ## TODO:
 - [X] Implement an unbeatable AI using minimax algorithm, and allow human player to verse the computer.

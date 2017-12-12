@@ -27,10 +27,11 @@ public class HumanPlayer extends TTTAgent
 	{
 		int playLimit = (gameBoard.length*gameBoard[0].length)-1;
 		System.out.print("[*] Select an unoccupied slot [0-"+playLimit+"]: ");
-		int movement = -1;
+		int movement = sc.nextInt();
 
 		while(movement < 0 || movement > playLimit) {
 			try {
+				System.out.println("Invalid input! try again.");
 				movement = sc.nextInt();
 			} catch (Exception e) {
 				System.out.println("Invalid Input! Select an unoccupied slot [0-"+playLimit+"]: ");

@@ -66,7 +66,7 @@ public abstract class TTTAgent
 	/**
 	* Return the movement of the player, to be implemented by the agent
 	* overriding this method, this method will be called for each players turn. 
-	* @param gb current state of game board given by a 2D array of size 3*3.
+	* @param gb current state of game board given by a 2D array of size n*n.
 	* @return the movement of the player, an integer from 0 to 8.
 	*/
 	public abstract int move(Symbol[][] gb);

@@ -19,6 +19,7 @@ public class TicTacToeBoard
 	**/
 	public TicTacToeBoard(int inRow, int inCol)
 	{
+		System.out.println("board size = " + inRow + " " + inCol);
 		this.row = inRow;
 		this.col = inCol;
 		boardStatus = new Symbol[row][col];
@@ -57,7 +58,7 @@ public class TicTacToeBoard
 	*/
 	public boolean checkValidityOfMove(int x)
 	{
-		return((x>=0 && x<9) && (boardStatus[x/3][x%3] == Symbol.EMPTY));
+		return((x>=0 && x<9) && (boardStatus[x/row][x%row] == Symbol.EMPTY));
 	}
 
 
@@ -97,31 +98,50 @@ public class TicTacToeBoard
 				}
 				count++;
 				
-				if(j < 2)
+				if(j < boardStatus.length-1)
 					System.out.print("| ");
 				else
 					System.out.print("  ");
 			}
 			if(i != boardStatus.length-1)
-				System.out.println("\n ------+------+------");
+			{
+				System.out.print("\n ");
+				for(int k = 0; k < boardStatus.length-1; k++)
+				{
+					System.out.print("------+");
+				}
+				System.out.print("------\n");
+			}
 			else
 				System.out.println("\n");
 		}
-
 	}
 
 
 
 	/**
 	* Converts an integer input from the user, an int between 0 to 8
-	* to a valid position in the 3*3 2D array, boardStatus 
+	* to a valid position in the n*n 2D array, boardStatus 
 	* .e. if user enters 5, gets interpret as 1,2 in 2D array.
 	* @param x,  the integer that was entered.
 	* @param y, the character representing either 'X' or 'O' - symbol the player is using.
 	*/
 	public void setBoard(int x, Symbol y)
 	{
-		boardStatus[x/3][x%3] = y;
+		boardStatus[x/row][x%row] = y;
+	}
+
+
+	/**
+	 * Check if entered position is occupied 
+	 * @param move the player's move
+	 * @return true if free, false otherwise.
+	 */
+	public boolean checkIfOccupied(int move)
+	{
+		if(boardStatus[move/row][move%col] == Symbol.EMPTY)
+			return true;
+		return false;
 	}
 
 
